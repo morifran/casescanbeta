@@ -1,3 +1,7 @@
+@font-face {
+    font-family: 'Ferry';
+    src: url('./fonts/Ferry-Black.woff') format('woff');
+}
 *{
     margin: 0%;
     padding: 0%;
