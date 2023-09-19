@@ -3,12 +3,14 @@
     padding: 0%;
 }
 .headerDiv{
-    width: 100%;
+    width:1440px;
     height: 93px;
     display: flex;
-    justify-content:space-around;
+    justify-content:space-around ;
     align-items: center;
     margin: 0;
+    margin-bottom: 69px;
+    padding-right: 60px;
 }
 .logo{
     cursor: pointer;
@@ -59,12 +61,140 @@
 .None{
     display: none;
 }
+.container{
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
 }
-@media(max-width: 670px){
-   .none{
-    display: none;
-   }
-   .headerDiv{
-    justify-content: space-around;
-   } 
+.description{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-left: 60px;
+}
+h2{
+    width: 743px;
+    color: #000;
+    font-family: Ferry;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+.commonText{
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.2px;
+    width: 534px;
+}
+.butDiv{
+    width: fit-content;
+}
+.requestBut{
+    width: 335px;
+    height: 59px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #5970FF;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.22px;
+    border: none;
+    margin-top: 50px;
+}
+.TechGuy{
+    margin-right: 60px;
+}
+}
+@media(max-width: 669px){
+.none{
+ display: none;
+}
+.headerDiv{
+ display: flex;
+ max-width:100%;
+ justify-content:space-around;
+ padding: 0%;
+ margin-bottom: 20px;
+} 
+.container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    min-width: 361px;
+    justify-content: start;
+    align-items: start;
+}
+.description{
+    display: flex;
+    flex-direction: column;
+    gap:19px;
+    justify-content: start;
+    align-items: start;
+    min-width: 361px;
+    max-width: 550px;
+}
+h2{
+    color: #000;
+    font-family: Ferry;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    letter-spacing: 0.28px;
+    min-width: 361px;
+    text-transform: uppercase;
+    margin-left: 20px;
+    margin-right: 30px;
+}
+.commonText{
+    min-width: 327px;
+    color: #000;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.18px;
+    margin-left: 20px;
+    margin-right: 30px;
+}
+.imgDiv{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.TechGuy{
+    width: 347.182px;
+    height: 327.312px;
+}
+.butDiv{
+    display: flex;
+    justify-content: center;
+    width: 90%;
+}
+.requestBut{
+    width: 335px;
+    height: 59px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #5970FF;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.2px;
+}
 }
