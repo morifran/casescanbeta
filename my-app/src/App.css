@@ -14,7 +14,6 @@
     align-items: center;
     margin: 0;
     margin-bottom: 69px;
-    padding-right: 60px;
 }
 .logo{
     cursor: pointer;
@@ -67,8 +66,8 @@
 }
 .container{
     display: flex;
-    justify-content: space-between;
-    width: 100vw;
+    width: 1320px;
+    height: 620px;
 }
 .description{
     display: flex;
@@ -77,7 +76,7 @@
     margin-left: 60px;
 }
 h2{
-    width: 743px;
+    width: 703px;
     color: #000;
     font-family: Ferry;
     font-size: 60px;
@@ -98,7 +97,8 @@ h2{
     width: 534px;
 }
 .butDiv{
-    width: fit-content;
+    width: 629px;
+    height: 593px;
 }
 .requestBut{
     width: 335px;
@@ -116,10 +116,72 @@ h2{
     border: none;
     margin-top: 50px;
 }
-.TechGuy{
-    margin-right: 60px;
+.whyUs{
+    width: 743px;
+    color: #000;
+    font-family: Ferry;
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    letter-spacing: 0.45px;
+    margin: 0px 0px 70px 60px;
 }
+.Swiper{
+    width: 1346px;
+    height: 349px;  
+    position: relative;
+    left: 60px;
 }
+.swiper-wrapper {
+    left: 45px;
+}
+.card{
+    width: 300px;
+    height: 180px;
+    padding: 22px 19px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #FFF;
+    border: #b9b9b9 1px solid;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.20);
+}
+.smallPic{
+    width: 65px;
+    height: 79px;
+    flex-shrink: 0;
+    background: #029491;
+    margin-bottom: 12px;
+    border-radius: 5px;
+}
+.cardTxt{
+    color: #000;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.18px;
+    width: 313px;
+}
+.swiper-button-prev,
+.swiper-button-next{
+    color: lightgray !important;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
 @media(max-width: 669px){
 .none{
  display: none;
