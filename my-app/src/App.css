@@ -37,6 +37,17 @@
     background: #7CE3E1;
     border: #7CE3E1;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+letter-spacing: 0.14px;
+
 }
 .rectangle{
     color: #7CE3E1;
@@ -169,7 +180,273 @@ h2{
 .swiper-button-next{
     color: lightgray !important;
 }
-
+.forPic{
+    margin-left: 3%;
+    margin-bottom: 107px;
+}
+.prices{
+    display: flex;
+    gap: 37px;
+    width: fit-content;
+    margin-left: 60px;
+    margin-bottom: 116px;
+}
+.priceCard1{
+    display: flex;
+    flex-direction: column;
+    width: 415px;
+height: 540px;
+flex-shrink: 0;
+border-radius: 10px;
+border: 2px solid #FFB64F;
+background: #FFF;
+box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.20);
+}
+.cardHeader{
+    display: flex;
+    width: 415px;
+    height: 132px;
+    flex-shrink: 0;
+    border-radius: 7px 7px 0px 0px;
+    background: #FFB64F;
+}
+.cardHeader2{
+    display: flex;
+    width: 415px;
+    height: 132px;
+    flex-shrink: 0;
+    border-radius: 7px 7px 0px 0px;
+    background: #7CE3E1;
+}
+.cardHeader3{
+    display: flex;
+    width: 415px;
+    height: 132px;
+    flex-shrink: 0;
+    border-radius: 7px 7px 0px 0px;
+    background: #000;
+}
+h3{
+    color: #000;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    letter-spacing: 0.3px;
+    margin: 30px 0px 10px 30px;
+}
+.lilDescription{
+    color: #000;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.18px;
+    margin-left: 30px;
+}
+.lilImage{
+    margin-top: 11px;
+}
+.activeTag{
+    position: relative;
+    left: 272px;
+    top: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.14px;
+    width: 134px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #3BA5E0;
+}
+.price{
+    display: flex;
+    align-items: center;
+    gap: 19px;
+    margin-left: 30px;
+    margin-top: 1px
+}
+.actualPrice{
+    color: #000;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.3px;
+}
+.pastPrice{
+    color: #000;
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.25px;
+    text-decoration-line:line-through;
+    opacity: 0.5;
+}
+.specifies{
+    color: #000;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.18px;
+    margin-left:30px;
+    margin-bottom: 59px;
+}
+.beforeList{
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    letter-spacing: 0.2px;
+    margin-left: 30px;
+}
+.cardList{
+    width: 350px;
+    margin-left: 30px;
+    margin-top: 10px;
+    list-style: none;
+    margin-bottom: 55px;
+}
+.cardList li{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #000;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.18px;
+}
+.greenThing{
+    color: rgb(28, 175, 28);
+}
+.cardBut{
+    width: 355px;
+    height: 59px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #D2D2D2;
+    margin: 0 auto;
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.2px;
+    margin-top: 10px;
+    border: #D2D2D2;
+}
+.detailsBut2{
+    width: 355px;
+    height: 59px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #5970FF;
+    margin: 0 auto;
+    color: #fff;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.2px;
+    margin-top: 10px;
+    border: #5970FF;
+    position: relative;
+    top: 26px;
+    bottom: 24px; 
+}
+.detailsBut3{
+    width: 355px;
+    height: 59px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #5970FF;
+    margin: 0 auto;
+    color: #fff;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.2px;
+    margin-top: 10px;
+    border: #5970FF;
+    position: relative;
+    top: 46px;
+    bottom: 24px; 
+}
+.priceCard3, .priceCard2{
+    display: flex;
+    flex-direction: column;
+    width: 415px;
+height: 540px;
+flex-shrink: 0;
+border-radius: 10px;
+background: #FFF;
+box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.20);
+}
+.bussines{
+    color: #FFF;
+font-family: Inter;
+font-size: 30px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+letter-spacing: 0.3px;
+}
+.lilDescription3{
+    color: #FFF;
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.18px;
+margin-left: 30px;
+}
+.footer{
+    display: flex;
+    width: 1440px;
+    height: 137px;
+    background: #029491;
+    justify-content: space-between;
+    align-items: center;
+}
+.footer div p {
+    color: #FFF;
+text-align: right;
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.14px;
+margin-right: 45px;
+}
+.footer img {
+    margin-left: 60px;
+}
 }
 
 
@@ -243,6 +520,7 @@ h2{
 .TechGuy{
     width: 347.182px;
     height: 327.312px;
+    margin: 0 auto;
 }
 .butDiv{
     display: flex;
@@ -262,5 +540,418 @@ h2{
     font-weight: 500;
     line-height: normal;
     letter-spacing: 0.2px;
+}
+.SwiperMobile{
+    width: 375px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+.whyUs{
+    width: 274px;
+    color: #000;
+    font-family: Ferry;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    letter-spacing: 0.28px;
+    margin-bottom: 32px;
+}
+.card{
+    max-width: 298px;
+    height: 188px;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.20);
+}
+.swiper{
+    display: flex;
+    justify-content: center;
+}
+.swiper-button-prev,
+.swiper-button-next{
+    color: lightgray !important;
+}
+.swiper-wrapper {
+    left: 38px;
+}
+.smallPic{
+    width: 57.821px;
+    height: 79px;
+    flex-shrink: 0;
+    background: #029491;
+    margin: 15px 0px 0px 16px ;
+    border-radius: 5px;
+}
+.cardTxt{
+    color: #000;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.18px;
+    margin-top: 5px;
+    margin-left: 17px;
+}
+.forPic{
+    display: flex;
+    width: 400.411px;
+    height: 392.522px;
+    flex-shrink: 0;
+    margin: 0 auto;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    overflow: hidden;
+}
+.guySvg{
+    display: flex;
+    width: 891.411px;
+    height: 392.522px;
+    flex-shrink: 0;
+}
+.prices{
+    display: flex; 
+    flex-direction: column;
+    gap: 37px;
+    width: 335px;
+    margin: 0 auto;
+    margin-bottom: 116px;
+}
+.priceCard1{
+    display: flex;
+    flex-direction: column;
+    width: 335px;
+height: 512px;
+flex-shrink: 0;
+border-radius: 10px;
+border: 2px solid #FFB64F;
+background: #FFF;
+box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.20);
+}
+.cardHeader{
+    display: flex;
+    width: 335px;
+    height: 132px;
+    flex-shrink: 0;
+    border-radius: 7px 7px 0px 0px;
+    background: #FFB64F;
+}
+.cardHeader2{
+    display: flex;
+    width: 335px;
+    height: 132px;
+    flex-shrink: 0;
+    border-radius: 7px 7px 0px 0px;
+    background: #7CE3E1;
+}
+.cardHeader3{
+    display: flex;
+    width: 335px;
+    height: 132px;
+    flex-shrink: 0;
+    border-radius: 7px 7px 0px 0px;
+    background: #000;
+}
+h3{
+    color: #000;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    letter-spacing: 0.3px;
+    margin: 30px 0px 10px 30px;
+}
+.lilDescription{
+    color: #000;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.18px;
+    margin-left: 30px;
+}
+.lilImage{
+    margin-top: 11px;
+}
+.activeTag{
+    position: relative;
+    left: 195px;
+    top: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.14px;
+    width: 134px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #3BA5E0;
+}
+.price{
+    display: flex;
+    align-items: center;
+    gap: 19px;
+    margin-left: 24px;
+    margin-top: 23px
+}
+.actualPrice{
+    color: #000;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.3px;
+}
+.pastPrice{
+    color: #000;
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.25px;
+    text-decoration-line:line-through;
+    opacity: 0.5;
+}
+.specifies{
+    color: #000;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.18px;
+    margin-left :24px;
+    margin-bottom: 36px;
+    width: 273px;
+}
+.beforeList{
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    letter-spacing: 0.2px;
+    margin-left: 24px;
+}
+.cardList{
+    width: 350px;
+    margin-left: 24px;
+    margin-top: 10px;
+    list-style: none;
+    margin-bottom: 55px;
+}
+.cardList li{
+    
+    color: #000;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.16px;
+}
+.greenThing{
+    color: rgb(28, 175, 28);
+}
+.cardBut{
+    width: 286.566px;
+height: 59px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #D2D2D2;
+    margin: 0 auto;
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.2px;
+    margin-top: 10px;
+    border: #D2D2D2;
+}
+.priceCard3, .priceCard2{
+    display: flex;
+    flex-direction: column;
+    width: 335px;
+height: 512px;
+flex-shrink: 0;
+border-radius: 10px;
+background: #FFF;
+box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.20);
+}
+.bussines{
+    color: #FFF;
+font-family: Inter;
+font-size: 30px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+letter-spacing: 0.3px;
+}
+.lilDescription3{
+    color: #FFF;
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.18px;
+margin-left: 30px;
+}
+.detailsBut2{
+    width: 286.566px;
+    height: 59px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #5970FF;
+    margin: 0 auto;
+    color: #fff;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.2px;
+    margin-top: 10px;
+    border: #5970FF;
+    position: relative;
+    top: 0px;
+    bottom: 24px; 
+}
+.detailsBut3{
+    width: 286.566px;
+    height: 59px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #5970FF;
+    margin: 0 auto;
+    color: #fff;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.2px;
+    margin-top: 10px;
+    border: #5970FF;
+    position: relative;
+    top: 43px;
+    bottom: 24px; 
+}
+.footer{
+    display: flex;
+    width: 110%;
+    height: 137px;
+    background: #029491;
+    justify-content: space-between;
+    align-items: center;
+}
+.footer div p {
+    color: #FFF;
+    text-align: right;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.14px;
+    margin-right: 19px;
+}
+.footer img {
+    margin-left: 18px;
+    width: 111px;
+height: 111px;
+flex-shrink: 0;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Стилизация выпадающего меню */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    left: 0px;
+    top: 85px;
+    width: 105%;
+    height: 270px;
+    flex-shrink: 0;
+    background-color:#029491;
+    padding: 10px;
+
+}
+
+.dropdown:hover .dropdown-menu {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    flex-direction: column;
+}
+
+.dropdown-menu li {
+    margin: 5px 0;
+    color: #FFF;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.16px;
+}
+
+.reg {
+    color: #fff;
+    color: #FFF;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.16px;
+opacity: 0.4;
+}
+.dropdown-menu button{
+    width: 295px;
+height: 51.955px;
+flex-shrink: 0;
+border-radius: 5px;
+background: #7CE3E1;
+color: #000;
+font-family: Inter;
+font-size: 20px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+letter-spacing: 0.2px;
+border: #7CE3E1;
 }
 }

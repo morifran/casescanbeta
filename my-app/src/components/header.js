@@ -13,9 +13,18 @@ function Header() {
     <div className="regMenu none">
       <a className="register">Зарегистрироваться</a>
       <p className="rectangle">│</p>
-      <button className="logIn">Войти</button>
+      <a className="logIn">Войти</a>
     </div>
-    <img src={menu} alt="изображение выпадающего меню" className="menu None"></img>
+    <nav>
+    <ul className="dropdown None"><li><img src={menu} alt="изображение выпадающего меню" className="menu None"></img>
+    <ul className="dropdown-menu None">
+      <li><a>Главная</a></li>
+      <li><a>Тарифы</a></li>
+      <li><a>FAQ</a></li>
+       <a className="reg">Зарегистрироваться</a>
+       <button>Войти</button>
+      </ul></li></ul>
+      </nav>
     </div>);
   }
   
