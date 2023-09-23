@@ -21,6 +21,22 @@
 .menu{
     cursor: pointer;
 }
+.link{
+    color: #000;
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.14px;
+text-decoration: none;
+}
+.link:hover{
+    color: #029491;
+}
+button{
+    cursor: pointer;
+}
 
 @media(min-width: 670px){
     .regMenu{
@@ -446,6 +462,138 @@ margin-right: 45px;
 }
 .footer img {
     margin-left: 60px;
+}
+.authorization{
+    display: flex;
+    width:1240px;
+    margin-left: 60px;
+    margin-bottom: 80px;
+    gap: 60px;
+}
+
+.decoration{
+    flex-direction: column;
+    display: flex;
+    width: 820px;
+}
+.decoration h2 {
+    width: 817px;
+    color: #000;
+font-family: Ferry;
+font-size: 40px;
+font-style: normal;
+font-weight: 900;
+line-height: normal;
+letter-spacing: 0.8px;
+}
+.character{
+    margin-left: 112px;
+    width: 321.764px;
+height: 342.035px;
+flex-shrink: 0;
+}
+.validation{
+    display: flex;
+    flex-direction: column;
+    width: 429px;
+    height: 523px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+}
+.LogOrReg{
+    display: flex;
+    width: 400px;
+    margin: 20px;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+.underlinedLog{
+    color: #029491;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.32px;
+width: 151px;
+height: 30px;
+background-color: #fff;
+border: none;
+border-bottom: #029491 2px solid;
+}
+.underlinedReg{
+    color: #C7C7C7;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.32px;
+    width: 213px;
+    height: 30px;
+    background-color: #fff;
+border: none;
+border-bottom: #C7C7C7 2px solid;
+}
+.registerBlank{
+    display: flex;
+    flex-direction: column;
+    width: 379px;
+    margin: 0 auto;
+}
+.registerP{
+    color: #949494;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.32px;
+margin-bottom: 15PX;
+}
+.registerBlank input {
+    width: 379px;
+height: 43px;
+flex-shrink: 0;
+    border-radius: 5px;
+border: 1px solid #C7C7C7;
+background: #FFF;
+box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
+margin-bottom: 20px;
+}
+.logInto{
+    width: 379px;
+height: 59px;
+flex-shrink: 0;
+border-radius: 5px;
+background: #5970FF;
+color: #FFF;
+font-family: Inter;
+font-size: 22px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+letter-spacing: 0.44px;
+border: none;
+}
+.restorePassword{
+    color: #5970FF;
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.28px;
+text-decoration-line: underline;
+margin: 0 auto;
+margin-top:15px;
+margin-bottom: 30px;
+}
+.socialMedia{
+    display: flex;
+    gap: 10px;
 }
 }
 
@@ -939,7 +1087,10 @@ line-height: normal;
 letter-spacing: 0.16px;
 opacity: 0.4;
 }
-.dropdown-menu button{
+.logInMobile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 295px;
 height: 51.955px;
 flex-shrink: 0;
