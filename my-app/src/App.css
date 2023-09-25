@@ -603,6 +603,10 @@ height: 92.065px;
 right: 450px;
 top: 100px;
 }
+.error{
+    margin: 0 auto;
+    margin-top: -12px;
+}
 }
 
 
@@ -1230,5 +1234,9 @@ top: 300px;
 }
 .character{
     margin: 0px 0px 80px 14px;
+}
+.error{
+    margin: 0 auto;
+    margin-top: -12px;
 }
 }
