@@ -9,6 +9,9 @@ import galochka from "../pics/галочка.svg"
 import bulb from "../pics/bulb.svg"
 import target from "../pics/target.svg"
 import mac from "../pics/mac.svg"
+import {
+  Nav
+} from "react-bootstrap"
 
 function Main() {
     return (<>
@@ -16,7 +19,7 @@ function Main() {
         <div className="description">
             <h2>сервис по поиску публикаций о компании по его ИНН</h2>
             <p className="commonText">Комплексный анализ публикаций, получение данных в формате PDF на электронную почту.</p>
-            <div className="butDiv"><button className="requestBut none None">Запросить данные</button></div>
+            <div className="butDiv"></div>
         </div>
         
             <img src={TechGuy} alt="Гик" className="TechGuy"></img>
@@ -87,7 +90,7 @@ function Main() {
           <li><img src={galochka}></img>Безопасная сделка</li>
           <li><img src={galochka}></img>Поддержка 24/7</li>
         </ul>
-        <button className="cardBut">Перейти в личный кабинет</button>
+        <Nav.Link href="/authorization" className="linkToAuthorization"><button className="cardBut">Перейти в личный кабинет</button></Nav.Link>
         </div>
         <div className="priceCard2">
         <div className="cardHeader2">
@@ -113,7 +116,7 @@ function Main() {
           <li><img src={galochka}></img>Экспорт истории</li>
           <li><img src={galochka}></img>Рекомендация по приоритетам</li>
         </ul>
-        <button className="detailsBut2">Подробнее</button>
+        <Nav.Link href="/authorization" className="linkToAuthorization"><button className="detailsBut2">Подробнее</button></Nav.Link>
         </div>
         <div className="priceCard3">
         <div className="cardHeader3">
@@ -139,7 +142,7 @@ function Main() {
           <li><img src={galochka}></img>Безлимитное количество запросов</li>
           <li><img src={galochka}></img>Приоритетная поддержка</li>
         </ul>
-        <button className="detailsBut3">Подробнее</button>
+        <Nav.Link href="/authorization" className="linkToAuthorization"><button className="detailsBut3">Подробнее</button></Nav.Link>
         </div>
      </div>
      </>
