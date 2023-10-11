@@ -19,13 +19,15 @@ function Main() {
         <div className="description">
             <h2>сервис по поиску публикаций о компании по его ИНН</h2>
             <p className="commonText">Комплексный анализ публикаций, получение данных в формате PDF на электронную почту.</p>
-            <div className="butDiv"></div>
+        </div>
+        <div>
+           <img src={TechGuy} alt="Гик" className="TechGuy"></img>
         </div>
         
-            <img src={TechGuy} alt="Гик" className="TechGuy"></img>
+      </div>  
         
         
-     </div>
+    
     <h2 className="whyUs">Почему именно мы</h2>
      <div className="Swiper none">
      <Swiper

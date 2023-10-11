@@ -36,17 +36,17 @@ const Content = () => {
                   onSwiper={(swiper) => console.log(swiper)}
                 >
                   <SwiperSlide><div className='fstSlideDiv'><p>Период</p><p>Всего</p><p>Риски</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p>10.09.2021</p><p>5</p><p>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p>10.09.2021</p><p>5</p><p>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p>10.09.2021</p><p>5</p><p>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p>10.09.2021</p><p>5</p><p>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p>10.09.2021</p><p>5</p><p>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p>10.09.2021</p><p>5</p><p>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p>10.09.2021</p><p>5</p><p>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p>10.09.2021</p><p>5</p><p>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p>10.09.2021</p><p>5</p><p>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p>10.09.2021</p><p>5</p><p>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p>10.09.2021</p><p>5</p><p>0</p></div></SwiperSlide>
+                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
+                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
+                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
+                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
+                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
+                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
+                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
+                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
+                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
+                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
+                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
                 </Swiper>
             </div>
             <div className='None'>

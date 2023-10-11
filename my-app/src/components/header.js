@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Nav
 } from "react-bootstrap"
@@ -10,10 +10,45 @@ import Main from "../pages/main";
 import Content from "../pages/content";
 import Autorization from "../pages/authorization";
 import Scan from "../pages/scan"
+import axios from 'axios';
 
 function Header() {
+  
+  const [companyCount, setCompanyCount] = useState(null);
+  const [companyLimit, setCompanyLimit] = useState(null);
+  const [error, setError] = useState(null);
 
-    return (<><div className="headerDiv">
+  useEffect(() => {
+    // Получаем Access Token из локального хранилища
+    const accessToken = localStorage.getItem('accessToken');
+
+    if (!accessToken) {
+      setError('Access Token не найден');
+      return;
+    }
+
+    // Отправка запроса к API при монтировании компонента
+    axios.get('https://gateway.scan-interfax.ru/api/v1/account/info', {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    })
+      .then((response) => {
+        // Обработка ответа
+        const data = response.data;
+
+        // Обновление состояния компонента для отображения данных
+        setCompanyCount(data.eventFiltersInfo.usedCompanyCount);
+        setCompanyLimit(data.eventFiltersInfo.companyLimit);
+      })
+      .catch((error) => {
+        // Обработка ошибки
+        setError(error.response ? error.response.data.message : 'Произошла ошибка');
+      });
+  }, []);
+
+    return (
+    <><div className="headerDiv">
     <img src={logo} alt="Лого компании скан" className="logo"></img>
     <ul className="headerList none">
       <li><Nav.Link href="/" className="link">Главная</Nav.Link></li>
@@ -21,10 +56,16 @@ function Header() {
       <li><Nav.Link href="#" className="link">FAQ</Nav.Link></li>
     </ul>
     <div className="companiesInfo None none">
-      <p className="smallText">Использовано компаний</p>
-      <p className="companyCount">34</p>
-      <p className="smallText">Лимит по компаниям </p>
-      <p className="companyLimit">100</p>
+      {error ? (
+        <p className="errorText">{error}</p>
+      ) : (
+        <>
+          <p className="smallText">Использовано компаний</p>
+          <p className="companyCount">{companyCount}</p>
+          <p className="smallText">Лимит по компаниям</p>
+          <p className="companyLimit">{companyLimit}</p>
+        </>
+      )}
     </div>
     <div className="regMenu none">
       <a className="register">Зарегистрироваться</a>

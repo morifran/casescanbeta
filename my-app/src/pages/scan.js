@@ -1,13 +1,62 @@
-import React, {Component} from 'react'
+import React, { useState } from 'react';
 import group from "../pics/Group.svg"
 import document from "../pics/Document.svg"
 import folders from "../pics/Folders.svg"
 import {
     Nav
   } from "react-bootstrap"
-
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const Scan = () => {
+
+    const [inputValue1, setInputValue1] = useState('');
+    const [isValid1, setIsValid1] = useState(true);
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+    const [error, setError] = useState('');
+
+
+
+    const handleChange1 = (e) => {
+      const value = e.target.value;
+      const isValidInput = /^\d{10}$/.test(value);
+      setIsValid1(isValidInput);
+      setInputValue1(value);
+    };
+    const [inputValue2, setInputValue2] = useState('');
+    const [isValid2, setIsValid2] = useState(true);
+  
+    const handleChange2 = (e) => {
+      const value = e.target.value;
+      const isValidInput = /^[1-9]\d{0,2}$|^1000$/.test(value);
+      setIsValid2(isValidInput);
+      setInputValue2(value);
+    };
+  
+    const handleStartDateChange = (date) => {
+      if (date > new Date()) {
+        setError('Введите корректные данные');
+      } else if (date > endDate) {
+        setError('Введите корректные данные');
+      } else {
+        setStartDate(date);
+        setError('');
+      }
+    };
+  
+    const handleEndDateChange = (date) => {
+      if (date > new Date()) {
+        setError('Введите корректные данные');
+      } else if (date < startDate) {
+        setError('Введите корректные данные');
+      } else {
+        setEndDate(date);
+        setError('');
+      }
+    };
+
+
         return(
             <div className='scan'>
                 <div>
@@ -17,26 +66,55 @@ const Scan = () => {
                     </div>
                     <div className='searchCard'>
                         <div className='fstPart'>
-                            <p>ИНН компании</p>
-                            <input placeholder='10 цифр' id="numbers"></input>
+                            <p>ИНН компании*</p>
+                            <input
+                                type="text"
+                                placeholder="10 цифр"
+                                id="numbers"
+                                value={inputValue1}
+                                onChange={handleChange1}
+                              />
+                              {!isValid1 && (
+                                <p style={{ color: 'red' }}>Введите корректные данные</p>
+                              )}
                             <p>Тональность</p>
                             <select id='reviews'>
                               <option>Любая</option>
                               <option>Негативная</option>
                               <option>Позитивная</option>
                             </select>
-                            <p>Количество документов в выдаче</p>
-                            <input placeholder='От 1 до 1000' id='quantity'></input>
-                            <p>Диапозон поиска</p>
-                            <div className='forDate'> 
-                                <select placeholder='Дата начала' className='date'>
-                                    <option>какой-то день</option>
-                                    <option>какой-то другой день</option>
-                                </select>
-                                <select placeholder='Дата конца' className='date'>
-                                    <option>какой-то день</option>
-                                    <option>какой-то другой день</option>
-                                </select>
+                            <p>Количество документов в выдаче*</p>
+                            <input
+                               type="text"
+                               placeholder="От 1 до 1000"
+                               id="quantity"
+                               value={inputValue2}
+                               onChange={handleChange2}
+                             />
+                             {!isValid2 && (
+                               <p style={{ color: 'red' }}>Введите число от 1 до 1000.</p>
+                             )}
+                            <p>Диапозон поиска*</p>
+                            <div className='forDate'>
+                            <div className='input-container'>
+                                <label>Дата начала:</label>
+                                <DatePicker
+                                  selected={startDate}
+                                  onChange={handleStartDateChange}
+                                  dateFormat="yyyy-MM-dd"
+                                  placeholderText="Выберите дату начала"
+                                />
+                              </div>
+                              <div className='input-container'>
+                                <label>Дата конца:</label>
+                                <DatePicker
+                                  selected={endDate}
+                                  onChange={handleEndDateChange}
+                                  dateFormat="yyyy-MM-dd"
+                                  placeholderText="Выберите дату конца"
+                                />
+                              </div>
+                              {error && <div id='error'>{error}</div>}
                             </div>
                             <Nav.Link href="/content" className='None'><button className='search'>Поиск</button></Nav.Link>
                         </div>

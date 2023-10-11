@@ -91,6 +91,7 @@ letter-spacing: 0.14px;
 
 .container{
     display: flex;
+    flex-direction: row;
     width: 1320px;
     height: 620px;
 }
@@ -689,6 +690,7 @@ width: 40px;
     display: flex;
     flex-direction: column;
     height: 543px;
+    width: 430px;
 }
 .dscr h2 {
     width: 817px;
@@ -770,22 +772,29 @@ width: 40px;
     display: flex;
     gap: 20px;
 }
-.date{
-    width: 176px;
-    height: 43px;
-    flex-shrink: 0;
-    border-radius: 5px;
-    border: 1px solid #C7C7C7;
-    background: #FFF;
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
-    color: #949494;
+
+.input-container {
+  margin-bottom: 10px;
+}
+
+label {
+    color: #000;
     font-family: Inter;
-    font-size: 14px;
+    font-size: 13px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    letter-spacing: 0.42px;
-    opacity: 0.4;
+    letter-spacing: 0.54px;
+  margin-right: 10px;
+}
+
+#error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  position: relative;
+  top: 13px;
+  right: 85px;
 }
 .scndPart{
     display: flex;

@@ -6,7 +6,6 @@ import Yandex from '../pics/Yandex.svg';
 import Lock from '../pics/lock.svg';
 import { useNavigate } from 'react-router-dom';
 
-
 const Authorization = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,6 +14,7 @@ const Authorization = () => {
   const [emailError, setEmailError] = useState('Введите корректные данные');
   const [passwordError, setPasswordError] = useState('Неправильный пароль');
   const [formValid, setFormValid] = useState(false);
+  const [logIn, setLogin] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,9 +22,17 @@ const Authorization = () => {
       setFormValid(false);
     } else {
       setFormValid(true);
-      console.log('форма окей');
     }
-  });
+  }, [emailError, passwordError]);
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    const expire = localStorage.getItem('expire');
+    
+    if (accessToken && expire && new Date(expire) > new Date()) {
+      navigate('/scan');
+    }
+  }, [navigate]);
 
   const emailHandler = (e) => {
     setEmail(e.target.value);
@@ -74,16 +82,25 @@ const Authorization = () => {
         });
 
         if (response.ok) {
+          setLogin(true)
           document.querySelector(".regMenu").classList.add("None")
           document.querySelector(".userInfo").classList.remove("None")
           document.querySelector(".companiesInfo").classList.remove("None")
           document.querySelector(".companiesInfo").classList.remove("none")
           
           setPasswordError('');
-          console.log('Успешный вход');
           navigate('/scan');
+          
+          const data = await response.json();
+          const { accessToken, expire } = data;
+
+          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('expire', expire);
+          console.log(accessToken)
+          console.log(expire)
         }
       } catch (error) {
+        setLogin(false)
         console.error('Ошибка при выполнении запроса к API:', error);
       }
     }
@@ -93,7 +110,7 @@ const Authorization = () => {
     <div className="authorization">
       <div className="decoration">
         <h2>Для оформления подписки на тариф, необходимо авторизоваться.</h2>
-        <img src={Characters} className="character none" />
+        <img src={Characters} className="character none" alt="Character" />
       </div>
 
       <div className="validation">
