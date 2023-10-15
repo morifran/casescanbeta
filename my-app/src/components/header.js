@@ -19,7 +19,6 @@ function Header() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Получаем Access Token из локального хранилища
     const accessToken = localStorage.getItem('accessToken');
 
     if (!accessToken) {
@@ -27,22 +26,17 @@ function Header() {
       return;
     }
 
-    // Отправка запроса к API при монтировании компонента
     axios.get('https://gateway.scan-interfax.ru/api/v1/account/info', {
       headers: {
         'Authorization': `Bearer ${accessToken}`
       }
     })
       .then((response) => {
-        // Обработка ответа
         const data = response.data;
-
-        // Обновление состояния компонента для отображения данных
         setCompanyCount(data.eventFiltersInfo.usedCompanyCount);
         setCompanyLimit(data.eventFiltersInfo.companyLimit);
       })
       .catch((error) => {
-        // Обработка ошибки
         setError(error.response ? error.response.data.message : 'Произошла ошибка');
       });
   }, []);
