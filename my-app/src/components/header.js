@@ -12,6 +12,9 @@ import Autorization from "../pages/authorization";
 import Scan from "../pages/scan"
 import axios from 'axios';
 
+// доделать подгрузку имени пользователя
+
+
 function Header() {
   
   const [companyCount, setCompanyCount] = useState(null);
@@ -68,7 +71,7 @@ function Header() {
     </div>
     <div className="userInfo None none">
       <div className="nickname">
-        <p className="userName">Алёша О.</p>
+        <p className="userName">Алёша О.</p>   
       <button className="leave">Выйти</button>
       </div>
       <div className="forPfp">

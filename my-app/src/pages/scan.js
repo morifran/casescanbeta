@@ -1,30 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import group from "../pics/Group.svg";
-import document from "../pics/Document.svg";
-import folders from "../pics/Folders.svg";
-import {
-  Nav
-} from "react-bootstrap";
+import React, { useState } from 'react';
+import group from "../pics/Group.svg"
+import document from "../pics/Document.svg"
+import folders from "../pics/Folders.svg"
+import { Nav } from "react-bootstrap"
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const Scan = () => {
   const [inputValue1, setInputValue1] = useState('');
   const [isValid1, setIsValid1] = useState(true);
-  const [inputValue2, setInputValue2] = useState('');
-  const [isValid2, setIsValid2] = useState(true);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [error, setError] = useState('');
   const [selectedTonality, setSelectedTonality] = useState("any");
-  const [token, setToken] = useState('');
-
-  useEffect(() => {
-    const storedToken = localStorage.getItem('accessToken');
-    if (storedToken) {
-      setToken(storedToken);
-    }
-  }, []);
+  const [token, setToken] = useState(""); // Здесь вы можете получить токен из localStorage или другого источника
+  const [inputValue2, setInputValue2] = useState('');
+  const [isValid2, setIsValid2] = useState(true) ;
 
   const handleChange1 = (e) => {
     const value = e.target.value;
@@ -62,46 +53,61 @@ const Scan = () => {
     }
   };
 
-  const handleTonalityChange = (e) => {
-    setSelectedTonality(e.target.value);
-  };
-
   const handleSearch = () => {
     const requestData = {
-      intervalType: "day",
-      histogramTypes: ["totalDocuments"],
+      intervalType: "month",
+      histogramTypes: ["totalDocuments", "riskFactors"],
       issueDateInterval: {
-        startDate: new Date().toISOString(), 
-        endDate: new Date().toISOString(),
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
       },
       searchContext: {
         targetSearchEntitiesContext: {
           targetSearchEntities: [
             {
-              type: "company"
-            }
+              type: "company",
+              sparkId: null,
+              entityId: null,
+              inn: inputValue1,
+              maxFullness: true,
+              inBusinessNews: null,
+            },
           ],
           onlyMainRole: true,
           tonality: selectedTonality,
-          onlyWithRiskFactors: true,
+          onlyWithRiskFactors: false,
           riskFactors: {
-            and: [{ id: 0 }],
-            or: [{ id: 0 }],
-            not: [{ id: 0 }],
+            and: [],
+            or: [],
+            not: [],
           },
           themes: {
-            and: [{ tonality: "any", entityId: 0 }],
-            or: [{ tonality: "any", entityId: 0 }],
-            not: [{ tonality: "any", entityId: 0 }],
-          }
+            and: [],
+            or: [],
+            not: [],
+          },
         },
-        searchEntitiesFilter: { and: [{ type: "company" }], or: [{ type: "company" }], not: [{ type: "company" }] },
-        locationsFilter: { and: [{ countryCode: "string", regionCode: 0 }], or: [{ countryCode: "string", regionCode: 0 }], not: [{ countryCode: "string", regionCode: 0 }] },
-        themesFilter: { and: [{ entityId: 0 }], or: [{ entityId: 0 }], not: [{ entityId: 0 }] }
+        themesFilter: {
+          and: [],
+          or: [],
+          not: [],
+        },
       },
-      searchArea: { includedSources: [0], excludedSources: [0], includedSourceGroups: [0], excludedSourceGroups: [0] },
-      attributeFilters: { excludeTechNews: true, excludeAnnouncements: true, excludeDigests: true },
-      similarMode: "none"
+      searchArea: {
+        includedSources: [],
+        excludedSources: [],
+        includedSourceGroups: [],
+        excludedSourceGroups: [],
+      },
+      attributeFilters: {
+        excludeTechNews: true,
+        excludeAnnouncements: true,
+        excludeDigests: true,
+      },
+      similarMode: "duplicates",
+      limit: parseInt(inputValue2),
+      sortType: "sourceInfluence",
+      sortDirectionType: "desc",
     };
 
     fetch('https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms', {
@@ -151,7 +157,11 @@ const Scan = () => {
               <p style={{ color: 'red' }}>Введите корректные данные</p>
             )}
             <p>Тональность</p>
-            <select id='reviews' value={selectedTonality} onChange={handleTonalityChange}>
+            <select
+              id='reviews'
+              value={selectedTonality}
+              onChange={(e) => setSelectedTonality(e.target.value)}
+            >
               <option value="any">Любая</option>
               <option value="negative">Негативная</option>
               <option value="positive">Позитивная</option>
@@ -213,14 +223,13 @@ const Scan = () => {
       </div>
       <div>
         <div className='forFolders'>
-          <img src={document} alt="Document" />
-          <img className='none' src={folders} alt="Folders" />
+          <img src={document} />
+          <img className='none' src={folders} />
         </div>
-        <img className='group' src={group} alt="Group" />
+        <img className='group' src={group} />
       </div>
     </div>
   );
-}
+};
 
 export default Scan;
-

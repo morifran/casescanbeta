@@ -30,6 +30,10 @@ const Authorization = () => {
     const expire = localStorage.getItem('expire');
     
     if (accessToken && expire && new Date(expire) > new Date()) {
+      document.querySelector(".regMenu").classList.add("None")
+      document.querySelector(".userInfo").classList.remove("None")
+      document.querySelector(".companiesInfo").classList.remove("None")
+      document.querySelector(".companiesInfo").classList.remove("none")
       navigate('/scan');
     }
   }, [navigate]);
