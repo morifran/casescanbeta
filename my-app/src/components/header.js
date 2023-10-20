@@ -20,6 +20,8 @@ function Header() {
   const [companyCount, setCompanyCount] = useState(null);
   const [companyLimit, setCompanyLimit] = useState(null);
   const [error, setError] = useState(null);
+  
+ 
 
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');

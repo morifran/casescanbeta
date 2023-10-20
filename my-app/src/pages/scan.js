@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import group from "../pics/Group.svg"
-import document from "../pics/Document.svg"
-import folders from "../pics/Folders.svg"
-import { Nav } from "react-bootstrap"
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import group from "../pics/Group.svg";
+import document from "../pics/Document.svg";
+import { useNavigate } from 'react-router-dom';
+import folders from "../pics/Folders.svg"
+
+export const SliderDataContext = createContext();
 
 const Scan = () => {
   const [inputValue1, setInputValue1] = useState('');
@@ -12,63 +14,39 @@ const Scan = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [error, setError] = useState('');
-  const [selectedTonality, setSelectedTonality] = useState("any");
-  const [token, setToken] = useState(""); // Здесь вы можете получить токен из localStorage или другого источника
+  const [searchButtonClicked, setSearchButtonClicked] = useState(false);
+  const [selectedTonality, setSelectedTonality] = useState('any');
   const [inputValue2, setInputValue2] = useState('');
-  const [isValid2, setIsValid2] = useState(true) ;
+  const [isValid2, setIsValid2] = useState(true);
+  const navigate = useNavigate();
+  const [sliderData, setSliderData] = useState([]);
+  const [searching, setSearching] = useState(false);
 
-  const handleChange1 = (e) => {
-    const value = e.target.value;
-    const isValidInput = /^\d{10}$/.test(value);
-    setIsValid1(isValidInput);
-    setInputValue1(value);
-  };
+  const handleSearch = async () => {
+    setSearchButtonClicked(true);
+    setSearching(true);
 
-  const handleChange2 = (e) => {
-    const value = e.target.value;
-    const isValidInput = /^[1-9]\d{0,2}$|^1000$/.test(value);
-    setIsValid2(isValidInput);
-    setInputValue2(value);
-  };
+    const accessToken = localStorage.getItem('accessToken');
 
-  const handleStartDateChange = (date) => {
-    if (date > new Date()) {
-      setError('Введите корректные данные');
-    } else if (date > endDate) {
-      setError('Введите корректные данные');
-    } else {
-      setStartDate(date);
-      setError('');
-    }
-  };
-
-  const handleEndDateChange = (date) => {
-    if (date > new Date()) {
-      setError('Введите корректные данные');
-    } else if (date < startDate) {
-      setError('Введите корректные данные');
-    } else {
-      setEndDate(date);
-      setError('');
-    }
-  };
-
-  const handleSearch = () => {
     const requestData = {
-      intervalType: "month",
-      histogramTypes: ["totalDocuments", "riskFactors"],
+      intervalType: 'month',
+      histogramTypes: ['totalDocuments', 'riskFactors'],
       issueDateInterval: {
         startDate: startDate.toISOString(),
         endDate: endDate.toISOString(),
+      },
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
       },
       searchContext: {
         targetSearchEntitiesContext: {
           targetSearchEntities: [
             {
-              type: "company",
+              type: 'company',
               sparkId: null,
               entityId: null,
-              inn: inputValue1,
+              inn: parseInt(inputValue1),
               maxFullness: true,
               inBusinessNews: null,
             },
@@ -104,47 +82,90 @@ const Scan = () => {
         excludeAnnouncements: true,
         excludeDigests: true,
       },
-      similarMode: "duplicates",
+      similarMode: 'duplicates',
       limit: parseInt(inputValue2),
-      sortType: "sourceInfluence",
-      sortDirectionType: "desc",
+      sortType: 'sourceInfluence',
+      sortDirectionType: 'desc',
     };
 
-    fetch('https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(requestData),
-    })
-      .then(response => {
-        if (response.status === 401) {
-          throw new Error('Unauthorized');
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        if (error.message === 'Unauthorized') {
-          console.error('Ошибка авторизации. Пожалуйста, войдите с правильным токеном.');
-        } else {
-          console.error(error);
-        }
+    try {
+      const response = await fetch('https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
       });
+      if (response.ok) {
+        console.log("ok")
+      } else {
+        console.log("err")
+      }
+      if (response.status === 401) {
+        throw new Error('Unauthorized');
+      }
+
+      const data = await response.json();
+      console.log(data)
+      setSliderData(data);
+      console.log(sliderData);
+      navigate('/content', { state: { sliderData: data } });
+    } catch (error) {
+      if (error.message === 'Unauthorized') {
+        console.error('Ошибка авторизации. Пожалуйста, войдите с правильным токеном.');
+      } else {
+        console.error(error);
+      }
+      setSearching(false);
+    }
+  };
+
+  const handleChange1 = (e) => {
+    const value = e.target.value;
+    const isValidInput = /^\d{10}$/.test(value);  
+    setIsValid1(isValidInput);
+    setInputValue1(value);
+  };
+
+  const handleChange2 = (e) => {
+    const value = e.target.value;
+    const isValidInput = /^[1-9]\d{0,2}$|^1000$/.test(value);
+    setIsValid2(isValidInput);
+    setInputValue2(value);
+  };
+
+  const handleStartDateChange = (date) => {
+    if (date > new Date()) {
+      setError('Введите корректные данные');
+    } else if (date > endDate) {
+      setError('Введите корректные данные');
+    } else {
+      setStartDate(date);
+      setError('');
+    }
+  };
+
+  const handleEndDateChange = (date) => {
+    if (date > new Date()) {
+      setError('Введите корректные данные');
+    } else if (date < startDate) {
+      setError('Введите корректные данные');
+    } else {
+      setEndDate(date);
+      setError('');
+    }
   };
 
   return (
-    <div className='scan'>
+    <div className="scan">
       <div>
-        <div className='dscr'>
+        <div className="dscr">
           <h2>Найдите необходимые данные в пару кликов.</h2>
-          <p className='commonText'>Задайте параметры поиска. Чем больше заполните, тем точнее поиск</p>
+          <p className="commonText">Задайте параметры поиска. Чем больше заполните, тем точнее поиск</p>
         </div>
-        <div className='searchCard'>
-          <div className='fstPart'>
+        <div className="searchCard">
+          <div className="fstPart">
             <p>ИНН компании*</p>
             <input
               type="text"
@@ -153,12 +174,10 @@ const Scan = () => {
               value={inputValue1}
               onChange={handleChange1}
             />
-            {!isValid1 && (
-              <p style={{ color: 'red' }}>Введите корректные данные</p>
-            )}
+            {!isValid1 && <p style={{ color: 'red' }}>Введите корректные данные</p>}
             <p>Тональность</p>
             <select
-              id='reviews'
+              id="reviews"
               value={selectedTonality}
               onChange={(e) => setSelectedTonality(e.target.value)}
             >
@@ -174,12 +193,10 @@ const Scan = () => {
               value={inputValue2}
               onChange={handleChange2}
             />
-            {!isValid2 && (
-              <p style={{ color: 'red' }}>Введите число от 1 до 1000.</p>
-            )}
+            {!isValid2 && <p style={{ color: 'red' }}>Введите число от 1 до 1000.</p>}
             <p>Диапазон поиска*</p>
-            <div className='forDate'>
-              <div className='input-container'>
+            <div className="forDate">
+              <div className="input-container">
                 <label>Дата начала:</label>
                 <DatePicker
                   selected={startDate}
@@ -188,7 +205,7 @@ const Scan = () => {
                   placeholderText="Выберите дату начала"
                 />
               </div>
-              <div className='input-container'>
+              <div className="input-container">
                 <label>Дата конца:</label>
                 <DatePicker
                   selected={endDate}
@@ -197,9 +214,11 @@ const Scan = () => {
                   placeholderText="Выберите дату конца"
                 />
               </div>
-              {error && <div id='error'>{error}</div>}
+              {error && <div id="error">{error}</div>}
             </div>
-            <Nav.Link href="/content" className='None'><button className='search' onClick={handleSearch}>Поиск</button></Nav.Link>
+            <button className="search None" onClick={handleSearch} disabled={searching}>
+              Поиск
+            </button>
           </div>
           <div className='scndPart none'>
             <input type="checkbox" className="custom-checkbox" id="1" name="1" value="yes" />
@@ -216,17 +235,17 @@ const Scan = () => {
             <label htmlFor="6">Включать анонсы и календари</label>
             <input type="checkbox" className="custom-checkbox" id="7" name="7" value="yes" />
             <label htmlFor="7">Включать сводки новостей</label>
-            <Nav.Link href="/content"><button className='search'>Поиск</button></Nav.Link>
+            <button className='search' onClick={handleSearch} disabled={searching}>Поиск</button>
             <p className='required'>* Обязательные к заполнению поля</p>
           </div>
         </div>
       </div>
       <div>
         <div className='forFolders'>
-          <img src={document} />
-          <img className='none' src={folders} />
+          <img src={document} alt="Document" />
+          <img className='none' src={folders} alt="Folders" />
         </div>
-        <img className='group' src={group} />
+        <img className='group' src={group} alt="Group" />
       </div>
     </div>
   );

@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
-import search from "../pics/Search.svg"
+import search from "../pics/Search.svg";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import pic from "../pics/postPic.png"
-import Zel from "../pics/ЗелЁнский.png"
+import pic from "../pics/postPic.png";
+import Zel from "../pics/ЗелЁнский.png";
+import { useLocation } from 'react-router-dom';
 
 const Content = () => {
+  const location = useLocation();
+  const sliderData = location.state && location.state.sliderData;
+
   useEffect(() => {
     document.querySelector(".regMenu").classList.add("None");
     document.querySelector(".userInfo").classList.remove("None");
@@ -16,56 +20,63 @@ const Content = () => {
 
   return (
     <div className='content'>
-        <div className='Description'>
-            <div className='waitPls'>
-                <h2>Ищем. Скоро будут результаты</h2>
-                <p className='commonText'>Поиск может занять некоторое время, просим сохранять терпение.</p>
-            </div>
-            <div className='forSearchImg'>
-                <img src={search}></img>
-            </div>  
+      <div className='Description'>
+        <div className='waitPls'>
+          <h2>Ищем. Скоро будут результаты</h2>
+          <p className='commonText'>Поиск может занять некоторое время, просим сохранять терпение.</p>
         </div>
-        <div className='result'>
-            <h2>Общая сводка</h2>
-            <p>Найдено {} вариантов </p>
-            <div className='none'>
-                <Swiper
-                  spaceBetween={-100}
-                  slidesPerView={9}
-                  onSlideChange={() => console.log('slide change')}
-                  onSwiper={(swiper) => console.log(swiper)}
-                >
-                  <SwiperSlide><div className='fstSlideDiv'><p>Период</p><p>Всего</p><p>Риски</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
-                  <SwiperSlide><div className='slideDiv'><p className='dateInf'>10.09.2021</p><p className='atAll'>5</p><p className='danger'>0</p></div></SwiperSlide>
-                </Swiper>
-            </div>
-            <div className='None'>
+        <div className='forSearchImg'>
+          <img src={search} alt="Search" />
+        </div>
+      </div>
+      <div className='result'>
+        <h2>Общая сводка</h2>
+        <p>Найдено {sliderData ? sliderData.length : 0} вариантов</p>
+        <div className='none'>
+          {sliderData && sliderData.length > 0 ? (
             <Swiper
-              spaceBetween={50}
-              slidesPerView={1}
+              spaceBetween={-100}
+              slidesPerView={9}
               onSlideChange={() => console.log('slide change')}
               onSwiper={(swiper) => console.log(swiper)}
             >
-              <SwiperSlide>Slide 1</SwiperSlide>
-              <SwiperSlide>Slide 2</SwiperSlide>
-              <SwiperSlide>Slide 3</SwiperSlide>
-              <SwiperSlide>Slide 4</SwiperSlide>
+              <SwiperSlide>
+                <div className='fstSlideDiv'>
+                  <p>Период</p>
+                  <p>Всего</p>
+                  <p>Риски</p>
+                </div>
+              </SwiperSlide>
+              {sliderData.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <div className='slideDiv'>
+                    <p className='dateInf'>{item.date}</p>
+                    <p className='atAll'>{item.value}</p>
+                    <p className='danger'>{item.value}</p>
+                  </div>
+                </SwiperSlide>
+              ))}
             </Swiper>
-            </div>
-            
+          ) : (
+            <p>No data available</p>
+          )}
         </div>
-        <h2 className='listDocuments'>Список документов</h2>
-        <div className='forPosts'>
+        <div className='None'>
+          <Swiper
+            spaceBetween={50}
+            slidesPerView={1}
+            onSlideChange={() => console.log('slide change')}
+            onSwiper={(swiper) => console.log(swiper)}
+          >
+            <SwiperSlide>Slide 1</SwiperSlide>
+            <SwiperSlide>Slide 2</SwiperSlide>
+            <SwiperSlide>Slide 3</SwiperSlide>
+            <SwiperSlide>Slide 4</SwiperSlide>
+          </Swiper>
+        </div>
+      </div>
+      <h2 className='listDocuments'>Список документов</h2>
+      <div className='forPosts'>
             <div className='postCard'>
                 <div className='forDayAndAuthor'>
                     <p className='day'>13.09.2021</p>

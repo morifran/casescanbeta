@@ -34,7 +34,7 @@ const Authorization = () => {
       document.querySelector(".userInfo").classList.remove("None")
       document.querySelector(".companiesInfo").classList.remove("None")
       document.querySelector(".companiesInfo").classList.remove("none")
-      navigate('/scan');
+
     }
   }, [navigate]);
 
