@@ -19,8 +19,9 @@ const Scan = () => {
   const [inputValue2, setInputValue2] = useState('');
   const [isValid2, setIsValid2] = useState(true);
   const navigate = useNavigate();
-  const [sliderData, setSliderData] = useState([]);
+  const [Data, setData] = useState();
   const [searching, setSearching] = useState(false);
+  
 
   const handleSearch = async () => {
     setSearchButtonClicked(true);
@@ -88,42 +89,44 @@ const Scan = () => {
       sortDirectionType: 'desc',
     };
 
-    try {
-      const response = await fetch('https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData),
-      });
-      if (response.ok) {
-        console.log("ok")
-      } else {
-        console.log("err")
+    const fetchAndSetData = async () => {
+      try {
+        const response = await fetch('https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms', {
+          method: 'POST',
+          headers: requestData.headers,
+          body: JSON.stringify(requestData),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data)
+          setData(data);
+          console.log(Data)
+          navigate('/content');
+        } else {
+          console.log("err");
+        }
+        if (response.status === 401) {
+          throw new Error('Unauthorized');
+        }
+      } catch (error) {
+        if (error.message === 'Unauthorized') {
+          console.error('Ошибка авторизации. Пожалуйста, войдите с правильным токеном.');
+        } else {
+          console.error(error);
+        }
+        setSearching(false);
       }
-      if (response.status === 401) {
-        throw new Error('Unauthorized');
-      }
+    };
 
-      const data = await response.json();
-      console.log(data)
-      setSliderData(data);
-      console.log(sliderData);
-      navigate('/content', { state: { sliderData: data } });
-    } catch (error) {
-      if (error.message === 'Unauthorized') {
-        console.error('Ошибка авторизации. Пожалуйста, войдите с правильным токеном.');
-      } else {
-        console.error(error);
-      }
-      setSearching(false);
-    }
+    fetchAndSetData();
   };
+
+
+
 
   const handleChange1 = (e) => {
     const value = e.target.value;
-    const isValidInput = /^\d{10}$/.test(value);  
+    const isValidInput = /^\d{10}$/.test(value);
     setIsValid1(isValidInput);
     setInputValue1(value);
   };
