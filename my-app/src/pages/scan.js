@@ -4,7 +4,11 @@ import 'react-datepicker/dist/react-datepicker.css';
 import group from "../pics/Group.svg";
 import document from "../pics/Document.svg";
 import { useNavigate } from 'react-router-dom';
-import folders from "../pics/Folders.svg"
+import folders from "../pics/Folders.svg";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchData } from '../actions';
+import { connect } from 'react-redux';
+
 
 export const SliderDataContext = createContext();
 
@@ -19,18 +23,55 @@ const Scan = () => {
   const [inputValue2, setInputValue2] = useState('');
   const [isValid2, setIsValid2] = useState(true);
   const navigate = useNavigate();
-  const [Data, setData] = useState();
-  const [searching, setSearching] = useState(false);
-  
+  const accessToken = localStorage.getItem('accessToken');
 
-  const handleSearch = async () => {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.data);
+  const searching = useSelector((state) => state.searching);
+
+  const handleSearch = () => {
     setSearchButtonClicked(true);
-    setSearching(true);
+    dispatch(fetchData(requestData));
+  };
 
-    const accessToken = localStorage.getItem('accessToken');
+  const handleChange1 = (e) => {
+    const value = e.target.value;
+    const isValidInput = /^\d{10}$/.test(value);
+    setIsValid1(isValidInput);
+    setInputValue1(value);
+  };
 
-    const requestData = {
-      intervalType: 'month',
+  const handleChange2 = (e) => {
+    const value = e.target.value;
+    const isValidInput = /^[1-9]\d{0,2}$|^1000$/.test(value);
+    setIsValid2(isValidInput);
+    setInputValue2(value);
+  };
+
+  const handleStartDateChange = (date) => {
+    if (date > new Date()) {
+      setError('Введите корректные данные');
+    } else if (date > endDate) {
+      setError('Введите корректные данные');
+    } else {
+      setStartDate(date);
+      setError('');
+    }
+  };
+
+  const handleEndDateChange = (date) => {
+    if (date > new Date()) {
+      setError('Введите корректные данные');
+    } else if (date < startDate) {
+      setError('Введите корректные данные');
+    } else {
+      setEndDate(date);
+      setError('');
+    }
+  };
+
+  const requestData = {
+    intervalType: 'month',
       histogramTypes: ['totalDocuments', 'riskFactors'],
       issueDateInterval: {
         startDate: startDate.toISOString(),
@@ -87,78 +128,13 @@ const Scan = () => {
       limit: parseInt(inputValue2),
       sortType: 'sourceInfluence',
       sortDirectionType: 'desc',
-    };
-
-    const fetchAndSetData = async () => {
-      try {
-        const response = await fetch('https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms', {
-          method: 'POST',
-          headers: requestData.headers,
-          body: JSON.stringify(requestData),
-        });
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data)
-          setData(data);
-          console.log(Data)
-          navigate('/content');
-        } else {
-          console.log("err");
-        }
-        if (response.status === 401) {
-          throw new Error('Unauthorized');
-        }
-      } catch (error) {
-        if (error.message === 'Unauthorized') {
-          console.error('Ошибка авторизации. Пожалуйста, войдите с правильным токеном.');
-        } else {
-          console.error(error);
-        }
-        setSearching(false);
-      }
-    };
-
-    fetchAndSetData();
   };
 
-
-
-
-  const handleChange1 = (e) => {
-    const value = e.target.value;
-    const isValidInput = /^\d{10}$/.test(value);
-    setIsValid1(isValidInput);
-    setInputValue1(value);
-  };
-
-  const handleChange2 = (e) => {
-    const value = e.target.value;
-    const isValidInput = /^[1-9]\d{0,2}$|^1000$/.test(value);
-    setIsValid2(isValidInput);
-    setInputValue2(value);
-  };
-
-  const handleStartDateChange = (date) => {
-    if (date > new Date()) {
-      setError('Введите корректные данные');
-    } else if (date > endDate) {
-      setError('Введите корректные данные');
-    } else {
-      setStartDate(date);
-      setError('');
+  useEffect(() => {
+    if (data) {
+      navigate('/content');
     }
-  };
-
-  const handleEndDateChange = (date) => {
-    if (date > new Date()) {
-      setError('Введите корректные данные');
-    } else if (date < startDate) {
-      setError('Введите корректные данные');
-    } else {
-      setEndDate(date);
-      setError('');
-    }
-  };
+  }, [data, navigate]);
 
   return (
     <div className="scan">
@@ -219,7 +195,7 @@ const Scan = () => {
               </div>
               {error && <div id="error">{error}</div>}
             </div>
-            <button className="search None" onClick={handleSearch} disabled={searching}>
+            <button className="search" onClick={handleSearch} disabled={searching}>
               Поиск
             </button>
           </div>
