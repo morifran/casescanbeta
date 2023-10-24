@@ -7,6 +7,10 @@ export const fetchDataSuccess = (data) => ({
     type: 'FETCH_DATA_FAILURE',
     error,
   });
+  export const setData = (data) => ({
+    type: 'SET_DATA',
+    payload: data,
+  });
   
   export const fetchData = (requestData) => async (dispatch) => {
     try {

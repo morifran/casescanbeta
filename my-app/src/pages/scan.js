@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import group from "../pics/Group.svg";
@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import folders from "../pics/Folders.svg";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../actions';
-import { connect } from 'react-redux';
 
 
 export const SliderDataContext = createContext();
@@ -132,6 +131,7 @@ const Scan = () => {
 
   useEffect(() => {
     if (data) {
+      console.log(data)
       navigate('/content');
     }
   }, [data, navigate]);
@@ -195,7 +195,7 @@ const Scan = () => {
               </div>
               {error && <div id="error">{error}</div>}
             </div>
-            <button className="search" onClick={handleSearch} disabled={searching}>
+            <button className="search None" onClick={handleSearch} disabled={searching}>
               Поиск
             </button>
           </div>
