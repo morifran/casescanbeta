@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useRef, useEffect } from "react";
 import search from "../pics/Search.svg";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -8,11 +8,11 @@ import Zel from "../pics/ЗелЁнский.png";
 import { useSelector } from 'react-redux';
 
 const Content = () => {
-
-
-  const data = useSelector((state) => state.data);
-  console.log(data)
+  let data = useSelector((state) => state.data);
   const searching = useSelector((state) => state.searching);
+
+  console.log("data:", data);
+  console.log("searching:", searching);
 
   useEffect(() => {
     document.querySelector(".regMenu").classList.add("None");
@@ -21,20 +21,16 @@ const Content = () => {
     document.querySelector(".companiesInfo").classList.remove("none");
   }, []);
 
-  let nonEmptyData = [];
-  if (Array.isArray(data)) {
-    nonEmptyData = data.filter(item => item.data.length > 0);
-  }
+
 
   return (
     <div className='content'>
       <div className='Description'>
-        <div className='waitPls'>
+      <div className='waitPls'>
             <>
               <h2 className='searchingResult'>Ищем. Скоро будут результаты</h2>
               <p className='commonText'>Поиск может занять некоторое время, просим сохранять терпение.</p>
             </>
-            <h2 className='listDocuments'>Общая сводка</h2>
         </div>
         <div className='forSearchImg'>
           <img src={search} alt="Search" />
@@ -42,37 +38,17 @@ const Content = () => {
       </div>
       <div className='result'>
         <div className='swiper'>
-        {data && data[0] && data[0].data && !searching && data[0].data.length > 0 ? (
-  <>
-    <h2>Общая сводка</h2>
-    <p>Найдено {data[0].data.length} вариантов</p>
-    <Swiper
-      spaceBetween={50}
-      slidesPerView={3}
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
-    >
-      <SwiperSlide>
-        <div className='fstSlideDiv'>
-          <p>Период</p>
-          <p>Всего</p>
-          <p>Риски</p>
-        </div>
-      </SwiperSlide>
-      {data[0].data.map((item, index) => (
-        <SwiperSlide key={index}>
-          <div className='slideDiv'>
-            <p className='dateInf'>{item.date.substring(0, 10)}</p>
-            <p className='atAll'>{item.value}</p>
-            <p className='danger'>{item.data[1].value}</p>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  </>
-) : (
-  <p>No data available</p>
-)}
+        <div>
+      <h2>Общая сводка</h2>
+      <p>Найдено вариантов</p>
+      <Swiper
+        spaceBetween={50}
+        slidesPerView={3}
+        onSlideChange={() => console.log('slide change')}
+        onSwiper={(swiper) => console.log(swiper)}
+      >
+      </Swiper>
+    </div>
 
             </div>
         <h2 className='listDocuments'>Список документов</h2>
@@ -110,5 +86,4 @@ const Content = () => {
     </div>
   );
 };
-
 export default Content;
